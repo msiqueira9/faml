@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Faml.Business.Business;
+﻿using Faml.Business.Business;
 using Faml.Business.Models;
 using Xunit;
 
@@ -86,6 +85,29 @@ namespace Faml.Tests.Business
         [InlineData(8, 8, 2, 25, PackageType.ExtraLarge)]
         [InlineData(9, 10, 12, 25, PackageType.ExtraLarge)]
         public void ShippingCalculator_ParcelSizeGreaterThan100_ExpectingExtraLargePackageAndCost(int height, int depth, int length, decimal cost, PackageType type)
+        {
+            //arrange
+            var item = new Parcel
+            {
+                Height = height,
+                Depth = depth,
+                Length = length
+            };
+
+
+            //Act
+            Package result = ShippingCalculator.CalculatePackageSizeAndCost(item);
+
+            //assert
+
+            Assert.NotNull(result);
+            Assert.Equal(cost, result.Cost);
+            Assert.Equal(type, result.Type);
+        }
+
+        [Theory]
+        [InlineData(-2, 2, 2, 0, PackageType.Undefined)]
+        public void ShippingCalculator_ParcelSizeSmallerThan0_ExpectingUndefinedPackageAndCost(int height, int depth, int length, decimal cost, PackageType type)
         {
             //arrange
             var item = new Parcel
