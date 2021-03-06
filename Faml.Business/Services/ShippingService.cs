@@ -6,16 +6,17 @@ namespace Faml.Business.Services
 {
     public class ShippingService
     {
-        public List<Package> ProcessList(List<Parcel> parcels)
+        public OrderResult ProcessList(IncomingOrder incomingOrder)
         {
-            List<Package> packages = new List<Package>();
+            OrderResult order = new OrderResult {OrderItems = new List<Package>()};
 
-            foreach (var item in parcels)
+            foreach (var item in incomingOrder.OrderItems)
             {
-                packages.Add(ShippingCalculator.CalculatePackageSizeAndCost(item));
+                order.OrderItems.Add(ShippingCalculator.CalculatePackageSizeAndIndividualCost(item));
             }
 
-            return packages;
+            
+            return OrderCalculator.CalculateOrderTotal(order, incomingOrder.IsSpeedyDeliver);
         }
     }
 }

@@ -8,17 +8,20 @@ namespace Faml.Tests.Service
     public class ShippingServiceTests
     {
         [Fact]
-        public void ShippingServiceTests_ListEmpty_ShouldReturnEmptyList()
+        public void ShippingServiceTests_ListEmpty_ShouldReturnNull()
         {
             //arrange
-            var list = new List<Parcel>( );
+            var incomingOrder = new IncomingOrder
+            {
+                OrderItems = new List<Parcel>()
+            };
 
             //Act
             ShippingService service = new ShippingService();
-            List<Package> result = service.ProcessList(list);
+            OrderResult result = service.ProcessList(incomingOrder);
 
             //assert
-            Assert.Empty(result);
+            Assert.Empty(result.OrderItems);
         }
 
         [Fact]
@@ -31,22 +34,29 @@ namespace Faml.Tests.Service
                 Depth = 3,
                 Length = 2
             };
+            //arrange
+            IncomingOrder incomingOrder = new IncomingOrder
+            {
+                OrderItems = new List<Parcel>()
+            };
 
-            var list = new List<Parcel> { item };
+            incomingOrder.OrderItems.Add(item);
 
             //Act
             ShippingService service = new ShippingService();
-            List<Package> result = service.ProcessList(list);
+            OrderResult result = service.ProcessList(incomingOrder);
 
             //assert
-            Assert.NotEmpty(result);
-            Assert.Single(result);
+            Assert.NotEmpty(result.OrderItems);
+            Assert.Single(result.OrderItems);
         }
 
         [Fact]
         public void ShippingServiceTests_ListWithMoreThanOneItem_ShouldReturnMoreThanOneItem()
         {
             //arrange
+            IncomingOrder incomingOrder = new IncomingOrder();
+
             var item = new Parcel
             {
                 Height = 1,
@@ -61,15 +71,15 @@ namespace Faml.Tests.Service
                 Length = 2
             };
 
-            var list = new List<Parcel> { item, item2 };
+            incomingOrder.OrderItems = new List<Parcel> { item, item2 };
 
             //Act
             ShippingService service = new ShippingService();
-            List<Package> result = service.ProcessList(list);
+            OrderResult result = service.ProcessList(incomingOrder);
 
             //assert
-            Assert.NotEmpty(result);
-            Assert.Equal(list.Count, result.Count);
+            Assert.NotEmpty(result.OrderItems);
+            Assert.Equal(result.OrderItems, result.OrderItems);
         }
     }
 }

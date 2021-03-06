@@ -4,7 +4,7 @@ namespace Faml.Business.Business
 {
     public static class ShippingCalculator
     {
-        public static Package CalculatePackageSizeAndCost(Parcel parcelItem)
+        public static Package CalculatePackageSizeAndIndividualCost(Parcel parcelItem)
         {
             //assuming we wont allow negative values and there will be some validation before it gets here
             int cubicMetre = parcelItem.Depth * parcelItem.Height * parcelItem.Length;

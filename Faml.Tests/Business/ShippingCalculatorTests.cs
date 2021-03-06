@@ -22,7 +22,7 @@ namespace Faml.Tests.Business
 
 
             //Act
-            Package result = ShippingCalculator.CalculatePackageSizeAndCost(item);
+            Package result = ShippingCalculator.CalculatePackageSizeAndIndividualCost(item);
 
             //assert
             Assert.NotNull(result);
@@ -46,7 +46,7 @@ namespace Faml.Tests.Business
 
 
             //Act
-            Package result = ShippingCalculator.CalculatePackageSizeAndCost(item);
+            Package result = ShippingCalculator.CalculatePackageSizeAndIndividualCost(item);
 
             //assert
 
@@ -71,7 +71,7 @@ namespace Faml.Tests.Business
 
 
             //Act
-            Package result = ShippingCalculator.CalculatePackageSizeAndCost(item);
+            Package result = ShippingCalculator.CalculatePackageSizeAndIndividualCost(item);
 
             //assert
 
@@ -96,7 +96,7 @@ namespace Faml.Tests.Business
 
 
             //Act
-            Package result = ShippingCalculator.CalculatePackageSizeAndCost(item);
+            Package result = ShippingCalculator.CalculatePackageSizeAndIndividualCost(item);
 
             //assert
 
@@ -119,7 +119,7 @@ namespace Faml.Tests.Business
 
 
             //Act
-            Package result = ShippingCalculator.CalculatePackageSizeAndCost(item);
+            Package result = ShippingCalculator.CalculatePackageSizeAndIndividualCost(item);
 
             //assert
 
